@@ -1,3 +1,6 @@
 .activeTab {
   font-weight: bold;
 }
+li[ui-sref]:hover {
+  cursor: pointer;
+}

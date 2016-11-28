@@ -37,7 +37,7 @@ function ShoppingListService($q, $timeout) {
     $timeout(function () {
       deferred.resolve(items);
     }, 800);
-
+    
     return deferred.promise;
   };
 }

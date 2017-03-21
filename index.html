@@ -8,16 +8,21 @@
   <body ng-app="ShoppingList">
     <h1>Shopping List with Events</h1>
     <div id="list" ng-controller="ShoppingListController as list">
-      <input type="text" ng-model="list.itemName" placeholder="item name">
-      <input type="text" ng-model="list.itemQuantity" placeholder="quantity">
-      <button ng-click="list.addItem()">Add Items</button>
-      <span>{{ list.lastRemoved }}</span>
+      <form name="require">
+        <input name="name" type="text" ng-model="list.itemName" placeholder="item name" required>
+        <input name="quantity" type="text" ng-model="list.itemQuantity" placeholder="quantity" required>
+        <button ng-click="list.addItem()" ng-disabled="require.$invalid">Add Items</button>
+        <span class="red" ng-if="require.name.$error.required
+                    && require.name.$touched ">Item name required</span>
+        <span class="red" ng-if="require.quantity.$error.required
+                    && require.quantity.$touched ">Item quantity required</span>
+        <span>{{ list.lastRemoved }}</span>
 
-      <shopping-list
-        items="list.items"
-        title="{{list.title}}"
-        on-remove="list.removeItem(index)"></shopping-list>
-
+        <shopping-list
+          items="list.items"
+          title="{{list.title}}"
+          on-remove="list.removeItem(index)"></shopping-list>
+      </form>
     </div>
 
     <loading-spinner></loading-spinner>
